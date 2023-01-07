@@ -1,23 +1,11 @@
 const fs = require('fs');
-const aws = require('aws-sdk');
+const { s3 } = require('./aws');
 
 if (process.env.NODE_ENV !== 'production') {
 	require('dotenv').config();
 }
 
-const region = process.env.AWS_BUCKET_REGION;
-const accessKeyId = process.env.AWS_ACCESS_KEY;
-const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
-
-aws.config.update({
-	region,
-	accessKeyId,
-	secretAccessKey,
-	apiVersion: '2006-03-01',
-});
-
 // Create an Amazon S3 service client object.
-const s3 = new aws.S3();
 
 const bucketName = process.env.AWS_BUCKET_NAME;
 
@@ -26,13 +14,10 @@ const bucketName = process.env.AWS_BUCKET_NAME;
 async function uploadFile(file) {
 	const fileStream = fs.createReadStream(file.path);
 
-	console.log();
-
 	const uploadParams = {
 		Bucket: bucketName,
 		Body: fileStream,
 		Key: file.originalname,
-		ContentType: file.originalname,
 	};
 
 	try {
@@ -62,6 +47,24 @@ async function getFile(fileKey) {
 }
 
 exports.getFile = getFile;
+
+// delete a file from s3
+async function deleteFile(fileKey) {
+	const downloadParams = {
+		Key: fileKey,
+		Bucket: bucketName,
+	};
+
+	try {
+		// Get the object} from the Amazon S3 bucket.
+		const data = s3.deleteObject(downloadParams).promise();
+		return data;
+	} catch (err) {
+		throw err;
+	}
+}
+
+exports.deleteFile = deleteFile;
 
 // list  a files from s3
 

@@ -1,0 +1,10 @@
+
+{
+	"Template": {
+		"TemplateName": "EmailVerify",
+		"SubjectPart": "Please confirm your email address",
+		"HtmlPart": "<html> <body><div style='text-align: center;'> <h3>Please confirm your email address.</h3><p>Click this link to verify your email.</p><div><a href={{link}}>{{link}}</a></div><p>If you did NOT request to verify this email address, do not click on the link. Please note that many times, the situation isn't a phishing attempt, but either a misunderstanding of how to use our service, or someone setting up email-sending capabilities on your behalf as part of a legitimate service, but without having fully communicated the procedure first. If you are still concerned, please forward this notification to us and let us know in the forward that you did not request the verification.</p></div></body></html>"
+	}
+}
+
+

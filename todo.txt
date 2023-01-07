@@ -1,0 +1,7 @@
+1. Create an array of req.ip's used to login. If a login occurs and is from an unfamiiar ip. Send email to confirm again.
+2. Enable email confirmation upon signing up.  done
+3. allow multiple file uploading
+4. create redux client side
+5. form including validation 
+6. loading screen when uploading
+7. forgot password logic  done
